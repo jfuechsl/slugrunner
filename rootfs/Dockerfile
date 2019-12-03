@@ -2,7 +2,7 @@ FROM heroku/heroku:18-build
 
 RUN mkdir /app
 RUN addgroup --quiet --gid 2000 slug && \
-    useradd slug --uid=2000 --gid=2000 --home-dir /app --no-create-home \
+        useradd slug --uid=2000 --gid=2000 --home-dir /app --no-create-home \
         --shell /bin/bash
 
 WORKDIR /app
@@ -13,12 +13,12 @@ EXPOSE 5000
 
 ADD ./runner /runner
 ADD ./bin /bin
-ADD https://storage.googleapis.com/object-storage-cli/bb8e054/objstorage-bb8e054-linux-amd64 /bin/objstorage
+ADD http://ky-assets.kontaineryard.io/hephy-objstorage/9f2656c/objstorage-9f2656c-linux-amd64 /bin/objstorage
 RUN chmod +x /bin/objstorage && \
-    chown slug:slug /app \
-                    /runner/init \
-                    /bin/get_object \
-                    /bin/objstorage
+        chown slug:slug /app \
+        /runner/init \
+        /bin/get_object \
+        /bin/objstorage
 
 USER slug
 ENV HOME /app
